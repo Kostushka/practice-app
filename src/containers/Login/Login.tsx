@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './Login.module.css';
 
 const Login: FC = () => {
-    return <></>;
+    return <>Login</>;
 };
 
 export default Login;
