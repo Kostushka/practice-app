@@ -2,16 +2,18 @@ import { FC } from 'react';
 import { Layout, Menu, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { RouteNames } from '../../router';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+
 import styles from './Navigation.module.css';
 
 const Navigation: FC = () => {
     const router = useNavigate();
-    const auth = true;
+    const { isAuth } = useTypedSelector((state) => state.auth);
 
     return (
         <Layout.Header>
             <Row justify='end' gutter={6}>
-                {auth ? (
+                {isAuth ? (
                     <>
                         <div className={styles.name}>Kostushka</div>
                         <Menu theme='dark' mode='horizontal' selectable={false}>
