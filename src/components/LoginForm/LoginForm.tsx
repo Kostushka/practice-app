@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import { Button, Card, Form, Input } from 'antd';
 import { rules } from '../../utils/rules';
 import styles from './LoginForm.module.css';
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
     const onFinish = () => {
         console.log('Success');
     };
@@ -15,7 +16,7 @@ const LoginForm = () => {
             <Card>
                 <Form.Item
                     label='Имя пользователя'
-                    name='Имя пользователя'
+                    name='username'
                     rules={[rules.required('Пожалуйста, введите имя!')]}
                 >
                     <Input />
@@ -23,7 +24,7 @@ const LoginForm = () => {
 
                 <Form.Item
                     label='Пароль'
-                    name='Пароль'
+                    name='password'
                     rules={[rules.required('Пожалуйста, введите пароль!')]}
                 >
                     <Input.Password />
