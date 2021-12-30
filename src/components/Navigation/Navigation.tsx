@@ -1,14 +1,16 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Layout, Menu, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { RouteNames } from '../../router';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-
+import { asyncActionCreators } from '../../store/reducers/authReducer/asyncActionCreators';
 import styles from './Navigation.module.css';
 
 const Navigation: FC = () => {
     const router = useNavigate();
     const { isAuth } = useTypedSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
     return (
         <Layout.Header>
@@ -19,7 +21,9 @@ const Navigation: FC = () => {
                         <Menu theme='dark' mode='horizontal' selectable={false}>
                             <Menu.Item
                                 key='1'
-                                onClick={() => console.log('Выйти')}
+                                onClick={() =>
+                                    dispatch(asyncActionCreators.logout())
+                                }
                             >
                                 Выйти
                             </Menu.Item>

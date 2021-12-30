@@ -1,11 +1,15 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Card, Form, Input } from 'antd';
 import { rules } from '../../utils/rules';
+import { asyncActionCreators } from '../../store/reducers/authReducer/asyncActionCreators';
+
 import styles from './LoginForm.module.css';
 
 const LoginForm: FC = () => {
+    const dispatch = useDispatch();
     const onFinish = () => {
-        console.log('Success');
+        dispatch(asyncActionCreators.login('N', '222'));
     };
     return (
         <Form
