@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { useState } from 'react';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { Button, Card, Form, Input } from 'antd';
 import { rules } from '../../utils/rules';
@@ -7,9 +9,12 @@ import { asyncActionCreators } from '../../store/reducers/authReducer/asyncActio
 import styles from './LoginForm.module.css';
 
 const LoginForm: FC = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const { isLoading, error } = useTypedSelector((state) => state.auth);
     const onFinish = () => {
-        dispatch(asyncActionCreators.login('N', '222'));
+        dispatch(asyncActionCreators.login(username, password));
     };
     return (
         <Form
@@ -18,12 +23,16 @@ const LoginForm: FC = () => {
             onFinish={onFinish}
         >
             <Card>
+                {error && <div className={styles.error}>{error}</div>}
                 <Form.Item
                     label='Имя пользователя'
                     name='username'
                     rules={[rules.required('Пожалуйста, введите имя!')]}
                 >
-                    <Input />
+                    <Input
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
                 </Form.Item>
 
                 <Form.Item
@@ -31,10 +40,17 @@ const LoginForm: FC = () => {
                     name='password'
                     rules={[rules.required('Пожалуйста, введите пароль!')]}
                 >
-                    <Input.Password />
+                    <Input.Password
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type='primary' htmlType='submit'>
+                    <Button
+                        type='primary'
+                        htmlType='submit'
+                        loading={isLoading}
+                    >
                         Вход
                     </Button>
                 </Form.Item>

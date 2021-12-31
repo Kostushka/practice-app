@@ -9,7 +9,7 @@ import styles from './Navigation.module.css';
 
 const Navigation: FC = () => {
     const router = useNavigate();
-    const { isAuth } = useTypedSelector((state) => state.auth);
+    const { isAuth, user } = useTypedSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     return (
@@ -17,7 +17,7 @@ const Navigation: FC = () => {
             <Row justify='end' gutter={6}>
                 {isAuth ? (
                     <>
-                        <div className={styles.name}>Kostushka</div>
+                        <div className={styles.name}>{user.username}</div>
                         <Menu theme='dark' mode='horizontal' selectable={false}>
                             <Menu.Item
                                 key='1'
