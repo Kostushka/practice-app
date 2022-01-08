@@ -1,6 +1,12 @@
 import { IEvent } from '../../../models/IEvent';
 import { IUser } from '../../../models/IUser';
-import { EventAction, EventActionEnum, EventStateType } from './types';
+import {
+    EventAction,
+    EventActionEnum,
+    EventStateType,
+    SetGuestsAction,
+    SetEventAction,
+} from './types';
 
 const initialState: EventStateType = {
     guests: [],
@@ -22,11 +28,11 @@ export const eventReducer = (
     }
 };
 
-export const setGuestsAction = (payload: IUser) => ({
+export const setGuestsAction = (payload: IUser[]): SetGuestsAction => ({
     type: EventActionEnum.SET_GUESTS,
     payload,
 });
-export const setEventAction = (payload: IEvent) => ({
+export const setEventAction = (payload: IEvent[]): SetEventAction => ({
     type: EventActionEnum.SET_EVENT,
     payload,
 });
