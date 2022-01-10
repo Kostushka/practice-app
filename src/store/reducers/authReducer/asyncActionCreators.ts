@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
     setAuthAction,
     setErrorAction,
@@ -6,6 +5,7 @@ import {
     setUserAction,
 } from '.';
 import { AppDispatch } from '../..';
+import { UserService } from '../../../api/userService';
 import { IUser } from '../../../models/IUser';
 
 export const asyncActionCreators = {
@@ -14,7 +14,7 @@ export const asyncActionCreators = {
         async (dispatch: AppDispatch) => {
             try {
                 dispatch(setIsLoadingAction(true));
-                const res = await axios.get<IUser[]>('./users.json');
+                const res = await UserService.getUsers();
                 const data = res.data.find(
                     (user) =>
                         user.username === username && user.password === password
