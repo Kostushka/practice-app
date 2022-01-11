@@ -1,11 +1,21 @@
 import { Button, Layout, Modal, Row } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import EventCalendar from '../../components/EventCalendar';
 import EventForm from '../../components/EventForm';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { getGuests } from '../../store/reducers/eventReducer/asyncActionCreators';
 import styles from './Event.module.css';
 
 const Event: FC = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const dispatch = useDispatch();
+    const { guests } = useTypedSelector((state) => state.event);
+
+    useEffect(() => {
+        dispatch(getGuests());
+    }, []);
+
     return (
         <Layout className={styles.modal}>
             <EventCalendar events={[]} />
@@ -23,7 +33,7 @@ const Event: FC = () => {
                 footer={null}
                 onCancel={() => setModalVisible(false)}
             >
-                <EventForm />
+                <EventForm guests={guests} />
             </Modal>
         </Layout>
     );
