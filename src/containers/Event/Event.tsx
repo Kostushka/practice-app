@@ -33,7 +33,10 @@ const Event: FC = () => {
                 footer={null}
                 onCancel={() => setModalVisible(false)}
             >
-                <EventForm guests={guests} />
+                <EventForm
+                    guests={guests}
+                    submit={(event) => console.log(event)}
+                />
             </Modal>
         </Layout>
     );
