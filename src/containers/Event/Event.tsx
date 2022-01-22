@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux';
 import EventCalendar from '../../components/EventCalendar';
 import EventForm from '../../components/EventForm';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { getGuests } from '../../store/reducers/eventReducer/asyncActionCreators';
+import { IEvent } from '../../models/IEvent';
+import {
+    getGuests,
+    createEvent,
+} from '../../store/reducers/eventReducer/asyncActionCreators';
 import styles from './Event.module.css';
 
 const Event: FC = () => {
@@ -15,6 +19,11 @@ const Event: FC = () => {
     useEffect(() => {
         dispatch(getGuests());
     }, []);
+
+    const addNewEvent = (event: IEvent) => {
+        setModalVisible(false);
+        dispatch(createEvent(event));
+    };
 
     return (
         <Layout className={styles.modal}>
@@ -33,10 +42,7 @@ const Event: FC = () => {
                 footer={null}
                 onCancel={() => setModalVisible(false)}
             >
-                <EventForm
-                    guests={guests}
-                    submit={(event) => console.log(event)}
-                />
+                <EventForm guests={guests} submit={addNewEvent} />
             </Modal>
         </Layout>
     );
