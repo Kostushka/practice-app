@@ -8,6 +8,7 @@ import { IEvent } from '../../models/IEvent';
 import {
     getGuests,
     createEvent,
+    fetchEvents,
 } from '../../store/reducers/eventReducer/asyncActionCreators';
 import styles from './Event.module.css';
 
@@ -15,9 +16,11 @@ const Event: FC = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useDispatch();
     const { guests } = useTypedSelector((state) => state.event);
+    const { user } = useTypedSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getGuests());
+        dispatch(fetchEvents(user.username));
     }, []);
 
     const addNewEvent = (event: IEvent) => {
