@@ -15,7 +15,7 @@ import styles from './Event.module.css';
 const Event: FC = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useDispatch();
-    const { guests } = useTypedSelector((state) => state.event);
+    const { guests, events } = useTypedSelector((state) => state.event);
     const { user } = useTypedSelector((state) => state.auth);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const Event: FC = () => {
 
     return (
         <Layout className={styles.modal}>
-            <EventCalendar events={[]} />
+            <EventCalendar events={events} />
             <Row justify='center'>
                 <Button
                     className={styles.btn}

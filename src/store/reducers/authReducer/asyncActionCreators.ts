@@ -22,8 +22,8 @@ export const asyncActionCreators = {
                 if (data) {
                     localStorage.setItem('auth', 'true');
                     localStorage.setItem('username', data.username);
-                    dispatch(setAuthAction(true));
                     dispatch(setUserAction(data));
+                    dispatch(setAuthAction(true));
                 } else {
                     dispatch(setErrorAction('Неверный логин или пароль'));
                 }
