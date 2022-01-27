@@ -9,7 +9,7 @@ interface EventCalendarProps {
 }
 
 const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
-    const dateCellRender = (value: Moment) => {
+    function dateCellRender(value: Moment) {
         const formateDate = formatDate(value.toDate());
 
         const currentDateEvents = events.filter(
@@ -23,7 +23,7 @@ const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
                 ))}
             </div>
         );
-    };
+    }
     return (
         <>
             <Calendar dateCellRender={dateCellRender} />
